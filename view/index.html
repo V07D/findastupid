@@ -20,17 +20,21 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-7 col-lg-offset-2">
-					<div class="jumbotron">
-						<p>Вставьте слово, которое означало бы то же, что и слова, стоящие вне скобок.</p>
+					<div class="jumbotron" id="question">
+						<p id="question_description">Вставьте слово, которое означало бы то же, что и слова, стоящие вне скобок.</p>
 						<form class="form-inline" role="form">
-							ТКАНЬ (<input class="form-control" style="width:100px;">) СОСТОЯНИЕ ВЕЩЕСТВА
+							<div id="question_text">ТКАНЬ (<input class="form-control" style="width:100px;">) СОСТОЯНИЕ ВЕЩЕСТВА</div>
 							<div class="text-right">
-								<button class="btn btn-info">Дальше</button>
+								<input type="button" class="btn btn-info" id="next_question" value="Дальше">
 							</div>
 						</form>
 					</div> <!-- /jumbotron -->
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<!-- <script src="js/underscore-min.js"></script>
+		<script src="js/backbone-min.js"></script> -->
+		<script src="js/index.js"></script> 
 	</body>
 </html>
