@@ -23,7 +23,7 @@ parse = function(question,num) {
 			return result;
 		}
 		else if(question.type == 'image_input') {
-			return '<img src="img/question/1.jpg"><br><input class="form-control question-input" id="question-input0" style="width:100px;">';
+			return '<img src="static/img/question/1.jpg"><br><input class="form-control question-input" id="question-input0" style="width:100px;">';
 		}
 	}
 parseDescription = function(question,num) {
