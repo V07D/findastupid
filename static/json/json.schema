@@ -1,0 +1,8 @@
+[
+    {
+        "id": Number,
+        "type": String(["input", "radio", "common", "image_input"]),
+        "description": String,
+        "question": String
+    }
+]
