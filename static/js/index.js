@@ -40,6 +40,8 @@ function parseDescription(question, num) {
 
 
 $(document).ready(function(){
+	$('#authModal').modal();
+	
     // скоро будет callback hell
     $.getJSON(jsonurl, function(questions) {
         var current = -1; // мда, грязный хак
