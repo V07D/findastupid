@@ -1,6 +1,6 @@
 // заменил на жсон реквест
 /*var templates = '[{"id":0,"type":"input","description":"Вставьте слово, которое означало бы то же, что и слова, стоящие вне скобок.","question":"ТКАНЬ <input id=0> СОСТОЯНИЕ ВЕЩЕСТВА"},{"id":1,"type":"radio","description":"Решите анаграммы и исключите лишнее слово.","question":{"0":"КOXЙЕК", "1":"СHИHET", "2":"ОЖИВТ", "3":"ЛУФОБТ"}},{"id":2,"type":"common","description":"Найдите общее окончание для всех перечисленных слов.","question":["ДР", "М", "ТР","Ц", "Щ", "ЯГ"]},{"id":3,"type":"image_input","image":"img/question/1.jpg"}]' */
-var jsonurl = document.location.origin + '/static/json/questions.json';
+var jsonurl = '/json/questions';
 
 // функция должна называться не parse
 function parse(questions, num) {
@@ -40,7 +40,12 @@ function parseDescription(question, num) {
 
 
 $(document).ready(function(){
-	$('#authModal').modal();
+	if(!logged) {
+		$('#authModal').modal();
+		$('#authModalSubmit').click(function(){
+			$('#authModalForm').submit();
+		});
+	}
 	
     // скоро будет callback hell
     $.getJSON(jsonurl, function(questions) {

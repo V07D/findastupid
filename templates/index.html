@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<script>var logged = Boolean({{ logged }});</script>
 		<meta charset="utf-8"> 
 		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
 	</head>
@@ -21,7 +22,7 @@
 			<div class="row">
 				<div class="col-lg-7 col-lg-offset-2">
 					<div class="jumbotron" id="question">
-						<p id="question_description">Вставьте слово, которое означало бы то же, что и слова, стоящие вне скобок.</p>
+						<p id="question_description"><!-- Вставьте слово, которое означало бы то же, что и слова, стоящие вне скобок. --></p>
 						<form class="form-inline" role="form">
 							<div id="question_text"><!--ТКАНЬ (<input class="form-control" style="width:100px;">) СОСТОЯНИЕ ВЕЩЕСТВА--></div>
 							<div class="text-right">
@@ -41,21 +42,21 @@
 						<h4 class="modal-title">Войдите!</h4>
 					</div>
 					<div class="modal-body">
-						<form role="form">
+						<form role="form" action="/login" method="post" id="authModalForm">
 						  <div class="form-group">
 						    <label for="inputEmail1">Email</label>
-						    <input type="email" class="form-control" id="inputEmail1" placeholder="email">
+						    <input type="email" class="form-control" id="inputEmail1" placeholder="email" name="email">
 						  </div>
 						  <div class="form-group">
 						    <label for="inputPassword1">Password</label>
-						    <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+						    <input type="password" class="form-control" id="inputPassword1" placeholder="Password" name="password">
 						  </div>
 						  <p><a href="/register">Зарегистрироваться</a></p>
 						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-						<button type="button" class="btn btn-primary">Готово</button>
+						<button type="button" class="btn btn-primary" id="authModalSubmit">Готово</button>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
