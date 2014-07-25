@@ -19,7 +19,7 @@ def makehash(*args):
 	# потому что я могу
 	sha1 = hashlib.sha1
 	sequence = [sha1(n.encode('utf-8')).hexdigest() for n in args]
-	return sha1(reduce(add, sequence, '').encode('utf-8')).hexdigest()
+	return sha1(''.join(sequence).encode('utf-8')).hexdigest()
 
 
 user = {'login': 'test', 'password': 'test'}
@@ -37,7 +37,7 @@ def login():
 	if email == user['login'] and password == user['password']:
 		# '%s' % s <- валидно
 		app.logger.info('Email: %s' % email)
-		m.update((email + password).encode('utf-8'))
+		m.update((email + password).encode('utf-8')	)
 		sid = m.digest()
 		# не совсем понял, зачем тебе sid
 		session['logged'] = 1

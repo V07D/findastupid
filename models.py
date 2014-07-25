@@ -17,13 +17,6 @@ class GameSession(Model):
 	
 	class Meta:
 		database = db
-		
-class SessionUsers(Model):
-	session = ForeignKeyField(GameSession, null=True)
-	user = ForeignKeyField(User, null=True)
-	
-	#SELECT u.username FROM User u, GameSession s, SessionUsers set WHERE u.id = set.user AND set.session = :PARAMETER:;
-
 
 class _User(object):
 	"""Модель юзера"""
@@ -40,7 +33,15 @@ class User(Model):
 	
 	class Meta:
 		database = db
+
+		
+class SessionUsers(Model):
+	session = ForeignKeyField(GameSession, null=True)
+	user = ForeignKeyField(User, null=True)
 	
+	#SELECT u.username FROM User u, GameSession s, SessionUsers set WHERE u.id = set.user AND set.session = :PARAMETER:;
+
+
 class Question(Model):
 	"""Класс для вопросов"""
 	id = IntegerField(primary_key=True)
