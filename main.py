@@ -43,6 +43,13 @@ def questions():
 		with open('static/json/questions.json') as json:
 			return json.read()
 	else:
+		return 'You are not logged in, sorry!'
+		
+@app.route("/json/question/<id>")
+def questions(qid):
+	if bool(session.get('logged')):	
+		return 'We will get question from DB by qid here'
+	else:
 		return 'You a not logged in, sorry!'
 	
 def getGameSession(gid):
