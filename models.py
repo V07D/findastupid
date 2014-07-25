@@ -16,7 +16,13 @@ class GameSession(Model):
 	owner = ForeignKeyField(User, null=True)
 	
 	class Meta:
-		database = db	
+		database = db
+		
+class SessionUsers(Model):
+	session = ForeignKeyField(GameSession, null=True)
+	user = ForeignKeyField(User, null=True)
+	
+	#SELECT u.username FROM User u, GameSession s, SessionUsers set WHERE u.id = set.user AND set.session = :PARAMETER:;
 
 
 class _User(object):
