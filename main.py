@@ -37,7 +37,7 @@ def login():
 	if email == user['login'] and password == user['password']:
 		# '%s' % s <- валидно
 		app.logger.info('Email: %s' % email)
-		m.update(email + password)
+		m.update((email + password).encode('utf-8'))
 		sid = m.digest()
 		# не совсем понял, зачем тебе sid
 		session['logged'] = 1
