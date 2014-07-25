@@ -49,7 +49,8 @@ def login():
 
 @app.route("/game/<gid>")
 def game(gid):
-	pass
+	action = request.form['action']
+	action_route = {'next':_next}
 	
 @app.route("/json/questions")
 def questions():
@@ -70,6 +71,7 @@ def getQuestion(qid):
 		return 'We will get question from DB by qid here'
 	else:
 		return 'You a not logged in, sorry!'
+		
 	
 def getGameSession(gid):
 	return Session()

@@ -6,12 +6,14 @@ db = SqliteDatabase('database.db')
 class _Session(object):
 	"""Абстрактная модель для сессий"""
 	_active = False
-	def __init__(self, users):
-		self._users = users
+	def __init__(self, owner):
+		self._active = True
+		self._owner = owner
 
 class GameSession(Model):
 	is_active = BooleanField(default=False)
 	gid = IntegerField()
+	owner = ForeignKeyField(User, null=True)
 	
 	class Meta:
 		database = db	
