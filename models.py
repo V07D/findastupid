@@ -9,8 +9,9 @@ class _Session(object):
 	def __init__(self, users):
 		self._users = users
 
-class Session(Model):
+class GameSession(Model):
 	is_active = BooleanField(default=False)
+	gid = IntegerField()
 	
 	class Meta:
 		database = db	
@@ -24,7 +25,7 @@ class _User(object):
 		self._blah = blah # абстрактный код
 
 class User(Model):
-	current_session = ForeignKeyField(Session, null=True)
+	current_session = ForeignKeyField(GameSession, null=True)
 	# текущая игровая сессия, может быть пустой
 	username = CharField()
 	hashsum = CharField()
@@ -34,5 +35,27 @@ class User(Model):
 	
 class Question(Model):
 	"""Класс для вопросов"""
-	_id = IntegerField()
+	id = IntegerField(primary_key=True)
+	type = CharField()
+	description = CharField()
+	question = CharField()
+	correct_answer = CharField()
 	
+	def check_answer(self, user_answer):
+		"""Возвращает булево значение в зависимости от правильности ответа."""
+		return user_answer == self.correct_answer
+	
+	def serialize_to_dict(self, with_answer=False):
+		"""Сериализует экземпляр модели в словарь"""
+		result = {
+			'id': self.id,
+			'type': self.type,
+			'description': self.description,
+			'question': self.question,
+		}
+		if with_answer:
+			result['correct_answer'] = self.correct_answer
+		return result
+	
+	class Meta:
+		database = db
