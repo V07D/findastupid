@@ -46,7 +46,7 @@ def questions():
 		return 'You are not logged in, sorry!'
 		
 @app.route("/json/question/<id>")
-def questions(qid):
+def getQuestion(qid):
 	if bool(session.get('logged')):	
 		return 'We will get question from DB by qid here'
 	else:
