@@ -1,7 +1,7 @@
 # coding: utf-8
-from models import User, GameSession, Question
+from models import *
 
-for model in (User, GameSession, Question):
+for model in (User, GameSession, SessionUsers, Question):
 	try:
 		model.drop_table()
 	except Exception as e:
