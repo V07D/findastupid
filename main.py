@@ -4,13 +4,18 @@
 from flask import (
 	Flask, render_template, json, session, redirect, url_for, escape, request, send_from_directory
 )
+from flask.ext.login import LoginManager
 import logging
 import hashlib
 import os
 from functools import reduce # бугага
 from operator import add # бвзазваава
+import logic
+import models
 
 app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 m = hashlib.md5()
 
@@ -50,7 +55,7 @@ def login():
 @app.route("/game/<gid>")
 def game(gid):
 	action = request.form['action']
-	action_route = {'next':_next}
+	action_route = {'next':next}
 	
 @app.route("/json/questions")
 def questions():
@@ -74,7 +79,7 @@ def getQuestion(qid):
 		
 	
 def getGameSession(gid):
-	return Session()
+	return GameSession()
 
 if __name__ == "__main__":
 	app.secret_key = '9sabdf9(B&F(B9fa0bdb(&D(S&(0dbfas[f9'
