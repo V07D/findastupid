@@ -4,7 +4,7 @@ from helpers import makehash
 
 MAX_QUESTIONS = 5
 
-def next_question(user,session):
+def next_question(user, session):
 	pass
 	
 def start(user):
