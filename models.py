@@ -24,7 +24,7 @@ class GameSession(BaseModel):
 	Game session model.
 	"""
 	is_active = BooleanField(default=False)
-	gid = IntegerField() # айдишник уже есть в модели по умолчанию
+	gid = IntegerField() # на самом деле, айдишник уже есть в модели по умолчанию
 	owner = ForeignKeyField(User, null=True)
 	
 	def get_users(self):

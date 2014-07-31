@@ -26,3 +26,8 @@ def login(username, password):
         return True
     except:
         return False
+
+class Game(object):
+    """
+    Было бы пиздец как удобно с помощью такого объекта делать всё, например, сериализуя его.
+    """
