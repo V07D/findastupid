@@ -42,11 +42,11 @@ class Question(BaseModel):
 	correct_answer = CharField()
 	
 	def check_answer(self, user_answer):
-		"""Возвращает булево значение в зависимости от правильности ответа."""
+		"""Returns True if user answer is correct, otherwise False"""
 		return user_answer == self.correct_answer
 	
 	def serialize_to_dict(self, with_answer=False):
-		"""Сериализует экземпляр модели в словарь"""
+		"""Serializes exemplar of model into dict"""
 		result = {
 			'id': self.id,
 			'type': self.type,
@@ -56,6 +56,14 @@ class Question(BaseModel):
 		if with_answer:
 			result['correct_answer'] = self.correct_answer
 		return result
+	
+	@classmethod
+	def serialize_all(cls, with_answers=False):
+	    """Serializes all questions into list of dicts"""
+	    result = []
+	    for question in Question.select():
+	        result.append(question.serialize_to_dict(with_answer=with_answers))
+	    return result
 
 if __name__ == '__main__':
 	u = User.create(username='yoba', hashsum='123')

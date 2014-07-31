@@ -2,29 +2,28 @@
 # coding: utf-8
 # таки на питончике третьем все работает
 from flask import (
-	Flask, render_template, json, session, redirect, url_for, escape, request, send_from_directory
+	Flask, render_template, json, session, redirect, url_for, escape, request, send_from_directory, jsonify
 )
 from flask.ext.login import LoginManager
 import logging
 import hashlib
 import os
-from functools import reduce # бугага
-from operator import add # бвзазваава
+from functools import reduce, wraps
 import logic
 import models
+from helpers import makehash, login_required
 
 app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-m = hashlib.md5()
+from jayson import jayson
+app.register_blueprint(jayson, url_prefix='/json')
 
-def makehash(*args):
-	"""sha1(sha1(arg1) + sha1(arg2) + ... + sha1(argn))"""
-	# потому что я могу
-	sha1 = hashlib.sha1
-	sequence = [sha1(n.encode('utf-8')).hexdigest() for n in args]
-	return sha1(''.join(sequence).encode('utf-8')).hexdigest()
+from randomusers import randomusers
+app.register_blueprint(randomusers, url_prefix='/randomusers')
+
+m = hashlib.md5()
 
 
 user = {'login': 'test', 'password': 'test'}
@@ -40,46 +39,41 @@ def login():
 	email = request.form['email']
 	password = request.form['password']
 	if email == user['login'] and password == user['password']:
-		# '%s' % s <- валидно
 		app.logger.info('Email: %s' % email)
 		m.update((email + password).encode('utf-8')	)
 		sid = m.digest()
-		# не совсем понял, зачем тебе sid
-		session['logged'] = 1
+		session['logged'] = True
 		app.logger.info('sid: %s' % sid)
 	else:
 		app.logger.info('login incorrect')
 		session['logged'] = 0
 	return redirect(url_for('index'))
 
+@app.route("/login/status")
+def login_status():
+	"""Returns JSON with status of user login: logged (True) or not logged (False)."""
+	logged = session.get('logged') or False
+	return jsonify(logged=logged)
+
+@app.route("/logout")
+def logout():
+	session.pop('logged', None)
+	return redirect(url_for('index'))
+
+@app.route("/question/check_answer/")
+def check_answer():
+	answer = request.args.get('answer')
+	id = request.args.get('id')
+	question = models.Question.get(id=int(id))
+	return jsonify(result=question.check_answer(answer))
+
+
 @app.route("/game/<gid>")
+@login_required
 def game(gid):
 	action = request.form['action']
 	action_route = {'next':next}
-	
-@app.route("/json/questions")
-def questions():
-	if session.get('logged'):	
-		#with open('./static/json/questions.json') as json:
-		#	return json.read()
-		# депрекатед дуе то некрасиво
-		# os.path.join, по хорошему, нужен
-		filename = os.path.join('json', 'questions.json')
-		# /static/json/questions.json
-		return app.send_static_file(filename)
-	else:
-		return 'You are not logged in, sorry!'
-		
-@app.route("/json/question/<id>")
-def getQuestion(qid):
-	if session.get('logged'):	
-		return 'We will get question from DB by qid here'
-	else:
-		return 'You a not logged in, sorry!'
-		
-	
-def getGameSession(gid):
-	return GameSession()
+
 
 if __name__ == "__main__":
 	app.secret_key = '9sabdf9(B&F(B9fa0bdb(&D(S&(0dbfas[f9'

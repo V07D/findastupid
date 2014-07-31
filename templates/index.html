@@ -1,21 +1,24 @@
 <html>
 	<head>
-		<script>var logged = Boolean({{ logged }});</script>
+		<script type="text/javascript">
+		var logged = Boolean({{ logged }});
+		// плохотупо, но это на разработку
+		</script>
 		<meta charset="utf-8"> 
 		<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
 	</head>
 	<body>
 		<div class="container">
 			<div class="page-header">
-				<h1>Найди тупиздня<small> новая интеллектуальная игра</small></h1>
+				<h1>Найди тупиздня <br><small> новая интеллектуальная игра</small></h1>
 			</div>
 			<div class="row">
 				<div class="col-lg-12 text-right">
-					<ul class="list-inline">
-						<li><a href="#"><img src="/static/img/avatars/anon.jpg" width="30" height="30" class="img-circle"> Анонимус</a></li>
+					<ul class="list-inline" id="users">
+						<!--<li><a href="#"><img src="/static/img/avatars/anon.jpg" width="30" height="30" class="img-circle"> Анонимус</a></li>
 						<li><a href="#"><img src="/static/img/avatars/vasia.jpg" width="30" height="30" class="img-circle"> Васян</a></li>
 						<li><a href="#"><img src="/static/img/avatars/pacan.jpg" width="30" height="30" class="img-circle"> xЧеткий пацанx</a></li>
-						<li><a href="#"><img src="/static/img/avatars/bydlo.jpg" width="30" height="30" class="img-circle"> Быдло с района</a></li>
+						<li><a href="#"><img src="/static/img/avatars/bydlo.jpg" width="30" height="30" class="img-circle"> Быдло с района</a></li>-->
 					</ul>
 				</div>
 			</div>
