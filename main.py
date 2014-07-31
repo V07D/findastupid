@@ -69,11 +69,29 @@ def check_answer():
 
 
 @app.route("/game/<gid>")
-@login_required
 def game(gid):
 	action = request.form['action']
-	action_route = {'next':next}
+	#action_route выпилил, потому что пришлось бы трахаться с функциями-обертками
+	if action == 'next':
+		logic.next_question(gid)
+		
+@app.route("/register",methods=['GET', 'POST'])
+def register():
+	if request.method == 'POST':
+		email = request.form['email']
+		username = request.form['username']
+		password = request.form['password']
+		#TODO: validate
+		hashsum = helpers.makehash(username,email,password)
+		user = Models.User.create(username=username,hashsum=hashsum)
+		session['logged'] = True
+		session['sid'] = helpers.makehash(username) #TODO: реализовать это на нормальном механизме сессий. Сейчас семи-секьюрно, потому что, все-таки, sid шифруется второй раз в куках.
+		
+		
+	return redirect(url_for('index'))
 
+def get_user(name):
+	user = models.User.get(name=name)
 
 if __name__ == "__main__":
 	app.secret_key = '9sabdf9(B&F(B9fa0bdb(&D(S&(0dbfas[f9'

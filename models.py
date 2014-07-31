@@ -29,6 +29,7 @@ class GameSession(BaseModel):
 class SessionUsers(BaseModel):
 	session = ForeignKeyField(GameSession, null=True)
 	user = ForeignKeyField(User, null=True)
+	correct_answers = IntegerField()
 	
 	#SELECT u.username FROM User u, GameSession s, SessionUsers set WHERE u.id = set.user AND set.session = :PARAMETER:;
 
