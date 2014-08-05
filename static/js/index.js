@@ -34,7 +34,11 @@ $(document).ready(function(){
             $('#authModalSubmit').click(function(){
                 $('#authModalForm').submit();
             });
-        };
+        }
+        else {
+			var template_game = _.template($('#template_game').html());
+			$('#game-area').html(template_game);
+		}
     });
     
     $.getJSON(questionurl, function(response) {

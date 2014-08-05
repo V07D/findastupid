@@ -21,7 +21,8 @@ app.register_blueprint(jayson, url_prefix='/json')
 from randomusers import randomusers
 app.register_blueprint(randomusers, url_prefix='/randomusers')
 
-m = hashlib.md5() # не знаю, что ты этим имел в виду, но это неправильно в корне
+#m = hashlib.md5() # не знаю, что ты этим имел в виду, но это неправильно в корне
+#ДЕПРИКАТЕД ДУЕ ТУ ЛЕГАСИ АРТИФАКТС ФРОМ ФАСТ ДЕВЕЛОПМЕНТ
 
 user = {'login': 'test', 'password': 'test'}
 
@@ -83,6 +84,8 @@ def register():
 		session['logged'] = True
 		session['sid'] = makehash(username) #TODO: реализовать это на нормальном механизме сессий. Сейчас семи-секьюрно, потому что, все-таки, sid шифруется второй раз в куках.
 		# нахуя хранить sid в куках? нихуя не понял, например
+		# у сессии есть идентификатор, SessionID, sid. По нему сессия достается из хранилища, например,
+		# и по нему проверятеся пользователь. Данные о пароле/имени вообще не должны храниться в куках
 		
 		
 	return redirect(url_for('index'))

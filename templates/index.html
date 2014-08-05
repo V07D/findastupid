@@ -22,18 +22,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-7 col-lg-offset-2">
-					<div class="jumbotron" id="question">
-						<p id="question_description"><!-- Вставьте слово, которое означало бы то же, что и слова, стоящие вне скобок. --></p>
-						<form class="form-inline" role="form">
-							<div id="question_text"><!--ТКАНЬ (<input class="form-control" style="width:100px;">) СОСТОЯНИЕ ВЕЩЕСТВА--></div>
-							<div class="text-right">
-								<button class="btn btn-info" id="next_question">Дальше</button>
-							</div>
-						</form>
-					</div> <!-- /jumbotron -->
-				</div>
+			<div class="row" id="game-area">
 			</div>
 		</div>
 		
@@ -65,9 +54,32 @@
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 		
+		<!-- Templates -->
+		
+		<script type="text/template" id="template_game">
+			<div class="col-lg-7 col-lg-offset-2">
+					<div class="jumbotron" id="question">
+						<p id="question_description"><!-- Вставьте слово, которое означало бы то же, что и слова, стоящие вне скобок. --></p>
+						<form class="form-inline" role="form">
+							<div id="question_text"><!--ТКАНЬ (<input class="form-control" style="width:100px;">) СОСТОЯНИЕ ВЕЩЕСТВА--></div>
+							<div class="text-right">
+								<button class="btn btn-info" id="next_question">Дальше</button>
+							</div>
+						</form>
+					</div> <!-- /jumbotron -->
+				</div>
+		</script>
+		
+		<!-- /Templates -->
+		
 		<script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
-		<!-- <script src="js/underscore-min.js"></script>
-		<script src="js/backbone-min.js"></script> -->
+<!--
+		<script type="text/javascript" src="/static/js/underscore-min.js"></script>
+-->
+		<script type="text/javascript" src="/static/js/underscore.js"></script>
+<!--
+		<script src="js/backbone-min.js"></script>
+-->
 		<script src="/static/js/index.js"></script>
 		<script src="/static/bootstrap/js/bootstrap.min.js"></script>
 	</body>
